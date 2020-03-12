@@ -29,7 +29,7 @@ class _CharacterScreenState extends State<ListCharecters> {
   Widget build(BuildContext context) {
     // TODO: implement build
     return Scaffold(
-        appBar: AppBar(title: Text("Pokemons")),
+        appBar: AppBar(title: Text("Characters")),
         body: SafeArea(
           bottom: true,
           child: FutureBuilder(
@@ -39,18 +39,43 @@ class _CharacterScreenState extends State<ListCharecters> {
                 List<Results> items = data.data.results;
                 return ListView.separated(
                     itemBuilder: (context, position) {
-                      return ListTile(
-                        title: Text(
-                          "#$position"+" "+items.elementAt(position).name,
-                          style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                      return Center(
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              height: MediaQuery.of(context).size.height/4,
+                              margin: EdgeInsets.only(top: 0),
+                              width: MediaQuery.of(context).size.width/2,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20.0),
+                                image: DecorationImage(
+                                    image: NetworkImage(items.elementAt(position).image),
+                                    fit: BoxFit.cover
+                                ),
+                              ),
+                            ),
+                            Container(
+                              height: MediaQuery.of(context).size.height/4,
+                              width: MediaQuery.of(context).size.width/2,
+                              color: Colors.black12,
+                              margin: EdgeInsets.only(top: 90),
+                              child: Container(
+                                margin: EdgeInsets.only(left: 13.0),
+                                child: Column(
+                                  children: <Widget>[
+                                    Text(items.elementAt(position).name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),),
+                                    Container(
+                                      margin: EdgeInsets.all(30),
+                                    ),
+                                    Text(items.elementAt(position).id.toString())
+                                  ],
+                                ),
+                              ),
+                            ),
+
+                         
+                          ],
                         ),
-                        /*leading: CircleAvatar(
-    backgroundImage: _pokemonList.elementAt(position).image
-    ),
-    onTap: () {
-    Navigator.pushNamed(context, pokemonDetails.routeName,
-    arguments: {"pokemon": _pokemonList.elementAt(position)});
-    }*/
                       );
                     },
                     separatorBuilder: (context, position) {
