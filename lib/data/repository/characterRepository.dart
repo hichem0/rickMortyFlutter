@@ -7,5 +7,6 @@ class CharacterRepository {
 
   Future<CharacterList>getAllCharacter() => Characterprovider().getAllCharacters();
 
+
   Future<CharacterDetails>getCharacterDetails(int id) => Characterprovider().getCharacterById(id);
 }
